@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { Picture } from 'astro:assets';
+import { WORK_DETAIL_IMAGE_WIDTHS } from '../../consts';
 
 export const getStaticPaths = (async () => {
   const works = await getCollection('work');
@@ -24,7 +25,11 @@ const { Content } = await render(work);
 <WorksGalleryLayout title={work.data.title} image={work.data.image.src}>
   <header>
     <div class="container mx-auto">
-      <Picture src={work.data.image} alt={work.data.title} />
+      <Picture
+        src={work.data.image}
+        alt={work.data.title}
+        widths={WORK_DETAIL_IMAGE_WIDTHS}
+      />
     </div>
   </header>
 

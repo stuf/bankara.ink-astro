@@ -11,19 +11,16 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 //  class:list={[className, { active: isActive }]}
 ---
 
-<a
-  href={href}
-  class:list={[className, 'text-2xl', { active: isActive }]}
-  {...props}
->
+<a href={href} class:list={[className, { active: isActive }]} {...props}>
   <slot />
 </a>
 <style>
   @reference '../styles/global.css';
 
   a {
-    display: inline-block;
-    text-decoration: none;
+    @apply inline-block;
+    @apply p-1;
+    @apply uppercase font-bold;
   }
   a.active {
     @apply bg-black;

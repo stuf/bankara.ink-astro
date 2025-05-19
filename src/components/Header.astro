@@ -6,6 +6,7 @@ const navLinks = [
   {
     href: '/',
     text: 'Home',
+    hide: true,
   },
   {
     href: '/works',
@@ -15,12 +16,18 @@ const navLinks = [
 ---
 
 <header class="mb-4">
-  <div class="container mx-auto my-4">
-    <nav class="flex space-x-8 items-center">
-      <h2><a href="/">{SITE_TITLE}</a></h2>
+  <div class="container mx-auto my-4 py-4">
+    <nav class="flex space-x-6 items-center">
+      <h2 class="text-2xl font-bold underline">
+        <a href="/">バンカラ ・ bankara</a>
+      </h2>
 
       <div class="space-x-2">
-        {navLinks.map(it => <HeaderLink href={it.href}>{it.text}</HeaderLink>)}
+        {
+          navLinks
+            .filter(x => !x.hide)
+            .map(it => <HeaderLink href={it.href}>{it.text}</HeaderLink>)
+        }
       </div>
     </nav>
   </div>

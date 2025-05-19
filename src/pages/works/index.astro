@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import { format } from 'date-fns';
 
 import WorksGalleryLayout from '../../layouts/WorksGallery.astro';
+import { WORK_GALLERY_IMAGE_WIDTHS } from '../../consts';
 
 const works = (await getCollection('work')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -11,20 +13,28 @@ const works = (await getCollection('work')).sort(
 
 <WorksGalleryLayout title="Works">
   <main>
-    <header>
-      <h1>work</h1>
+    <header class="container mx-auto my-4 py-4">
+      <h1 class="text-9xl font-hero">Works</h1>
     </header>
 
     <div class="container mx-auto">
-      <ul class="grid grid-cols-3 gap-4">
+      <ul class="grid grid-cols-4 gap-4">
         {
           works.map(it => (
-            <li class="border-2 border-red-500">
+            <li class="relative item">
+              <div class="info left-2">{it.data.title}</div>
+
+              <div class="info right-2">
+                <time datetime={it.data.pubDate.toISOString()}>
+                  {format(it.data.pubDate, 'yyyy-MM-dd')}
+                </time>
+              </div>
+
               <a href={`/works/${it.id}`}>
                 <Image
                   src={it.data.image}
                   alt={it.data.title}
-                  width={800}
+                  widths={WORK_GALLERY_IMAGE_WIDTHS}
                   loading="lazy"
                   decoding="async"
                   class="object-cover h-full w-full"
@@ -37,3 +47,22 @@ const works = (await getCollection('work')).sort(
     </div>
   </main></WorksGalleryLayout
 >
+
+<style>
+  @reference '../../styles/global.css';
+
+  .item {
+    @apply scale-90;
+    @apply transition-all;
+  }
+
+  .item:hover {
+    @apply shadow-xl;
+    @apply scale-100;
+  }
+
+  .info {
+    @apply absolute bottom-2;
+    @apply bg-black text-white px-2 py-1;
+  }
+</style>
