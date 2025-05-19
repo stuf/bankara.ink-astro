@@ -1,0 +1,17 @@
+---
+import Header from '../components/Header.astro';
+import MainLayout from './Main.astro';
+
+interface Props {
+  title?: string;
+  image?: string;
+}
+
+const { title, image } = Astro.props;
+---
+
+<MainLayout title={title} image={image}>
+  <Header title={title} image={image} />
+
+  <slot />
+</MainLayout>

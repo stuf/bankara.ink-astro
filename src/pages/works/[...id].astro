@@ -1,0 +1,36 @@
+---
+import type { GetStaticPaths } from 'astro';
+import WorksGalleryLayout from '../../layouts/WorksGallery.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { Picture } from 'astro:assets';
+
+export const getStaticPaths = (async () => {
+  const works = await getCollection('work');
+
+  return works.map(it => ({
+    params: { id: it.id },
+    props: it,
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = CollectionEntry<'work'>;
+
+const work = Astro.props;
+const { Content } = await render(work);
+---
+
+<WorksGalleryLayout title={work.data.title} image={work.data.image.src}>
+  <header>
+    <div class="container mx-auto">
+      <Picture src={work.data.image} alt={work.data.title} />
+    </div>
+  </header>
+
+  <article>
+    <div class="container mx-auto">
+      <Content />
+    </div>
+  </article>
+</WorksGalleryLayout>

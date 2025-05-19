@@ -12,6 +12,10 @@
     "@astrojs/mdx": "^4.2.6",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
-    "astro": "^5.7.13"
+    "@tailwindcss/vite": "^4.1.7",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "astro": "^5.7.13",
+    "prettier-plugin-sort-json": "^4.1.1",
+    "tailwindcss": "^4.1.7"
   }
 }
