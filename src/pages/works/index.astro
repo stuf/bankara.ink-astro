@@ -31,11 +31,11 @@ const works = (await getCollection('work')).sort(
                 </time>
               </div>
 
-              {/* {it.rendered?.html && (
+              {it.rendered?.html && !it.data.hideContent && (
                 <div class="info top-2 right-2 flex space-x-2 items-center">
                   <Icon icon="book" /> <span>Lore</span>
                 </div>
-              )} */}
+              )}
 
               <a href={`/works/${it.id}`}>
                 <Image

@@ -6,6 +6,7 @@ image: '../../assets/works/20240128-alone-w1440.jpg'
 tags:
   - oc:cappy
   - lore
+hideContent: true
 ---
 
 # Alone
