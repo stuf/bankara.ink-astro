@@ -8,6 +8,7 @@ import { Picture } from 'astro:assets';
 import Tag from '@/components/Tag.astro';
 import { WORK_DETAIL_IMAGE_WIDTHS } from '@/consts';
 import WorksGalleryLayout from '@/layouts/WorksGallery.astro';
+import Icon from '@/components/Icon.astro';
 
 export const getStaticPaths = (async () => {
   const works = await getCollection('work');
@@ -31,12 +32,16 @@ const hasContent = !!work.rendered?.html;
 <WorksGalleryLayout title={work.data.title} image={work.data.image.src}>
   <header>
     <div class="container mx-auto">
-      <div>
+      <div class="relative">
+        <div class="absolute z-10">
+          <a href="/works" class="block">
+            <Icon icon="arrowLeft" class="fill-amber-50 inline-block size-24" />
+          </a>
+        </div>
         <Picture
           src={work.data.image}
           alt={work.data.title}
           widths={WORK_DETAIL_IMAGE_WIDTHS}
-          class="mx-auto"
         />
       </div>
     </div>
