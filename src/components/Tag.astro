@@ -1,0 +1,16 @@
+---
+interface Props {}
+---
+
+<span class="tag"><slot /></span>
+
+<style>
+  @reference '../styles/global.css';
+
+  .tag {
+    @apply inline-block px-1;
+    @apply uppercase;
+    @apply bg-background-tag;
+    @apply text-foreground-tag;
+  }
+</style>

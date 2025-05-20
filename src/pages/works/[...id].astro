@@ -1,11 +1,13 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import WorksGalleryLayout from '../../layouts/WorksGallery.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { Picture } from 'astro:assets';
-import { WORK_DETAIL_IMAGE_WIDTHS } from '../../consts';
+
+import Tag from '@/components/Tag.astro';
+import { WORK_DETAIL_IMAGE_WIDTHS } from '@/consts';
+import WorksGalleryLayout from '@/layouts/WorksGallery.astro';
 
 export const getStaticPaths = (async () => {
   const works = await getCollection('work');
@@ -20,22 +22,61 @@ type Props = CollectionEntry<'work'>;
 
 const work = Astro.props;
 const { Content } = await render(work);
+
+const isDev = import.meta.env.DEV;
+const showContent = !work.data.hideContent;
+const hasContent = !!work.rendered?.html;
 ---
 
 <WorksGalleryLayout title={work.data.title} image={work.data.image.src}>
   <header>
     <div class="container mx-auto">
-      <Picture
-        src={work.data.image}
-        alt={work.data.title}
-        widths={WORK_DETAIL_IMAGE_WIDTHS}
-      />
+      <div>
+        <Picture
+          src={work.data.image}
+          alt={work.data.title}
+          widths={WORK_DETAIL_IMAGE_WIDTHS}
+          class="mx-auto"
+        />
+      </div>
     </div>
   </header>
 
-  <article>
-    <div class="container mx-auto">
-      <Content />
-    </div>
-  </article>
+  <!-- {
+    hasContent && showContent && (
+      <article>
+        <div class="container mx-auto">
+          <div class="content">
+            {work.data.tags && (
+              <div class="content-meta">
+                <ul class="flex space-x-2">
+                  {work.data.tags.map(it => (
+                    <li>
+                      <Tag>{it}</Tag>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div class="prose prose-slate prose-xl">
+              <Content />
+            </div>
+          </div>
+        </div>
+      </article>
+    )
+  } -->
 </WorksGalleryLayout>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .content {
+    @apply w-9/12 mx-auto -mt-12 p-8 px-16 bg-white relative space-y-2;
+  }
+
+  .content-meta {
+    /* @apply border-2; */
+  }
+</style>

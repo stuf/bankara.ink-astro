@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 
 :root {
   --background: #ffffff;
@@ -11,6 +12,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-background-tag: var(--foreground);
+  --color-foreground-tag: var(--background);
+
   --color-accent: #435bf3;
   --font-sans: 'Overpass';
   --font-hero: var(--font-archivoblack);

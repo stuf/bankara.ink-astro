@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 
 import WorksGalleryLayout from '../../layouts/WorksGallery.astro';
 import { WORK_GALLERY_IMAGE_WIDTHS } from '../../consts';
+import Icon from '../../components/Icon.astro';
 
 const works = (await getCollection('work')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -22,13 +23,19 @@ const works = (await getCollection('work')).sort(
         {
           works.map(it => (
             <li class="relative item">
-              <div class="info left-2">{it.data.title}</div>
+              <div class="info bottom-2 left-2">{it.data.title}</div>
 
-              <div class="info right-2">
+              <div class="info bottom-2 right-2">
                 <time datetime={it.data.pubDate.toISOString()}>
                   {format(it.data.pubDate, 'yyyy-MM-dd')}
                 </time>
               </div>
+
+              {/* {it.rendered?.html && (
+                <div class="info top-2 right-2 flex space-x-2 items-center">
+                  <Icon icon="book" /> <span>Lore</span>
+                </div>
+              )} */}
 
               <a href={`/works/${it.id}`}>
                 <Image
@@ -62,7 +69,8 @@ const works = (await getCollection('work')).sort(
   }
 
   .info {
-    @apply absolute bottom-2;
+    @apply absolute;
     @apply bg-black text-white px-2 py-1;
+    @apply shadow-md;
   }
 </style>
