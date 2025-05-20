@@ -34,14 +34,15 @@ const hasContent = !!work.rendered?.html;
     <div class="container mx-auto">
       <div class="relative">
         <div class="absolute z-10">
-          <a href="/works" class="block">
-            <Icon icon="arrowLeft" class="fill-amber-50 inline-block size-24" />
+          <a href="/works" class="block bg-black hover:shadow-lg">
+            <Icon icon="arrowLeft" class="fill-white block size-24" />
           </a>
         </div>
         <Picture
           src={work.data.image}
           alt={work.data.title}
           widths={WORK_DETAIL_IMAGE_WIDTHS}
+          class="mx-auto"
         />
       </div>
     </div>
