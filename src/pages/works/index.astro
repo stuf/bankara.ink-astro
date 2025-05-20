@@ -13,9 +13,9 @@ const works = (await getCollection('work')).sort(
 ---
 
 <WorksGalleryLayout title="Works">
-  <main>
+  <main class="max-sm:px-8">
     <header class="container mx-auto my-4 py-4">
-      <h1 class="text-9xl font-hero">Works</h1>
+      <h1 class="max-md:text-6xl text-9xl font-hero">Works</h1>
     </header>
 
     <div class="container mx-auto">
@@ -52,15 +52,15 @@ const works = (await getCollection('work')).sort(
         }
       </ul>
     </div>
-  </main></WorksGalleryLayout
->
+  </main>
+</WorksGalleryLayout>
 
 <style>
   @reference '../../styles/global.css';
 
   .item {
-    @apply scale-90;
-    @apply transition-all;
+    @apply min-md:scale-90;
+    @apply min-md:transition-all;
   }
 
   .item:hover {
