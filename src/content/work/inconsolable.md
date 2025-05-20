@@ -3,6 +3,10 @@ title: Inconsolable
 description: ''
 pubDate: '2025-01-21'
 image: '../../assets/works/20250121-unconsolable-w1440.jpg'
+tags:
+  - oc:cappy
+  - oc:pippy
+  - lore
 # hideContent: true
 ---
 

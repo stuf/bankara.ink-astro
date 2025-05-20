@@ -5,8 +5,8 @@ description: ''
 pubDate: '2025-01-18'
 image: '../../assets/works/20250118-on-childhood.jpg'
 tags:
-  - cappy
-  - pippy
+  - oc:cappy
+  - oc:pippy
   - lore
 ---
 
