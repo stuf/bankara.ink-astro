@@ -7,7 +7,7 @@ tags:
   - oc:cappy
   - oc:pippy
   - lore
-# hideContent: true
+hideContent: true
 ---
 
 # Inconsolable

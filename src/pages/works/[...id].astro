@@ -42,12 +42,12 @@ const hasContent = !!work.rendered?.html;
     </div>
   </header>
 
-  <!-- {
+  {
     hasContent && showContent && (
       <article>
         <div class="container mx-auto">
           <div class="content">
-            {work.data.tags && (
+            {/* {work.data.tags && (
               <div class="content-meta">
                 <ul class="flex space-x-2">
                   {work.data.tags.map(it => (
@@ -57,23 +57,24 @@ const hasContent = !!work.rendered?.html;
                   ))}
                 </ul>
               </div>
-            )}
+            )} */}
 
-            <div class="prose prose-slate prose-xl">
+            <div class=" prose prose-slate prose-xl sm:prose-pink">
               <Content />
             </div>
           </div>
         </div>
       </article>
     )
-  } -->
+  }
 </WorksGalleryLayout>
 
 <style>
   @reference '@/styles/global.css';
 
   .content {
-    @apply w-9/12 mx-auto -mt-12 p-8 px-16 bg-white relative space-y-2;
+    @apply w-9/12 md:mx-auto sm:m-0 md:-mt-12 p-8 md:px-16 bg-white relative space-y-2;
+    @apply max-sm:w-full;
   }
 
   .content-meta {
