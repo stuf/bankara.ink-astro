@@ -21,34 +21,50 @@ const works = (await getCollection('work')).sort(
     <div class="container mx-auto">
       <ul class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
         {
-          works.map(it => (
-            <li class="relative item">
-              <div class="info bottom-2 left-2">{it.data.title}</div>
+          works.map(it => {
+            const hasLore = it.rendered?.html && !it.data.hideContent;
 
-              <div class="info bottom-2 right-2">
-                <time datetime={it.data.pubDate.toISOString()}>
-                  {format(it.data.pubDate, 'yyyy-MM-dd')}
-                </time>
-              </div>
+            return (
+              <li
+                class:list={[
+                  'relative item',
+                  hasLore &&
+                    'rounded-2xl overflow-hidden border-4 border-blue-500',
+                ]}
+              >
+                <div class="info bottom-2 left-2">{it.data.title}</div>
 
-              {it.rendered?.html && !it.data.hideContent && (
-                <div class="info top-2 right-2 flex space-x-2 items-center">
-                  <Icon icon="book" /> <span>Lore</span>
+                <div class="info bottom-2 right-2">
+                  <time datetime={it.data.pubDate.toISOString()}>
+                    {format(it.data.pubDate, 'yyyy-MM-dd')}
+                  </time>
                 </div>
-              )}
 
-              <a href={`/works/${it.id}`}>
-                <Image
-                  src={it.data.image}
-                  alt={it.data.title}
-                  widths={WORK_GALLERY_IMAGE_WIDTHS}
-                  loading="lazy"
-                  decoding="async"
-                  class="object-cover h-full w-full"
-                />
-              </a>
-            </li>
-          ))
+                {hasLore && (
+                  <div
+                    class:list={[
+                      'absolute px-2 py-1',
+                      'text-white top-2 right-2 flex space-x-2 items-center',
+                      'infoLore',
+                    ]}
+                  >
+                    <Icon icon="book" /> <span>Lore</span>
+                  </div>
+                )}
+
+                <a href={`/works/${it.id}`}>
+                  <Image
+                    src={it.data.image}
+                    alt={it.data.title}
+                    widths={WORK_GALLERY_IMAGE_WIDTHS}
+                    loading="lazy"
+                    decoding="async"
+                    class="object-cover h-full w-full"
+                  />
+                </a>
+              </li>
+            );
+          })
         }
       </ul>
     </div>
@@ -61,11 +77,20 @@ const works = (await getCollection('work')).sort(
   .item {
     @apply min-md:scale-90;
     @apply min-md:transition-all;
+    @apply shadow;
   }
 
   .item:hover {
     @apply shadow-xl;
     @apply scale-100;
+  }
+
+  .infoLore {
+    @apply bg-blue-500 text-white;
+  }
+
+  .infoTag {
+    @apply bg-black text-white;
   }
 
   .info {
