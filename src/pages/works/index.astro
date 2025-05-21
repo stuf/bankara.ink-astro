@@ -23,6 +23,7 @@ const works = (await getCollection('work')).sort(
         {
           works.map(it => {
             const hasLore = it.rendered?.html && !it.data.hideContent;
+            const hasCW = it.data.tw;
 
             return (
               <li
@@ -40,15 +41,24 @@ const works = (await getCollection('work')).sort(
                   </time>
                 </div>
 
-                {hasLore && (
+                {(hasLore || hasCW) && (
                   <div
                     class:list={[
                       'absolute px-2 py-1',
                       'text-white top-2 right-2 flex space-x-2 items-center',
-                      'infoLore',
                     ]}
                   >
-                    <Icon icon="book" /> <span>Lore</span>
+                    {hasCW && (
+                      <div class="infoHighlight bg-red-500">
+                        <Icon icon="warning" />
+                        <span>CW</span>
+                      </div>
+                    )}
+                    {hasLore && (
+                      <div class="infoHighlight bg-blue-500">
+                        <Icon icon="book" /> <span>Lore</span>
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -85,8 +95,12 @@ const works = (await getCollection('work')).sort(
     @apply scale-100;
   }
 
+  .infoHighlight {
+    @apply px-2 py-1;
+  }
+
   .infoLore {
-    @apply bg-blue-500 text-white;
+    /* @apply bg-blue-500 text-white; */
   }
 
   .infoTag {
