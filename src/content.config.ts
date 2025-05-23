@@ -25,6 +25,7 @@ const work = defineCollection({
       updatedDate: z.coerce.date().optional(),
       image: image(),
       tags: z.array(z.string()).optional(),
+      related: z.array(z.string()).optional(),
       tw: z.boolean().optional(),
       hideContent: z.boolean().optional(),
     }),

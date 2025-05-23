@@ -8,6 +8,8 @@ tags:
   - oc:cappy
   - oc:pippy
   - lore
+related:
+  - belonging
 ---
 
 # It's not them. It's you.
