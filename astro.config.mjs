@@ -1,4 +1,4 @@
-// @ts-check
+// .@ts-check
 import { defineConfig } from 'astro/config';
 
 import mdx from '@astrojs/mdx';
@@ -17,5 +17,9 @@ export default defineConfig({
 
   adapter: vercel({
     imageService: true,
+    imagesConfig: {
+      sizes: [1440],
+      minimumCacheTTL: 2678400,
+    },
   }),
 });

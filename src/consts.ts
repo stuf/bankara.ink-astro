@@ -13,6 +13,6 @@ export const IMAGE_SIZE = {
 
 const img = IMAGE_SIZE;
 
-export const IMAGE_WIDTHS = [240, 480, 720, 1440];
-export const WORK_GALLERY_IMAGE_WIDTHS = [img.sm, img.md, img.lg];
-export const WORK_DETAIL_IMAGE_WIDTHS = [img.md, img.lg, img.xl];
+export const IMAGE_WIDTHS = [1440];
+export const WORK_GALLERY_IMAGE_WIDTHS = [img.lg];
+export const WORK_DETAIL_IMAGE_WIDTHS = [img.xl];
