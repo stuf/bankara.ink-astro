@@ -18,6 +18,7 @@ export default defineConfig({
   adapter: vercel({
     imageService: true,
     imagesConfig: {
+      domains: ['bankara.ink'],
       sizes: [1440],
       minimumCacheTTL: 2678400,
     },
