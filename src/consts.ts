@@ -15,4 +15,6 @@ const img = IMAGE_SIZE;
 
 export const IMAGE_WIDTHS = [1440];
 export const WORK_GALLERY_IMAGE_WIDTHS = [img.lg];
+
+export const WORK_DETAIL_IMAGE_WIDTH = img.xl;
 export const WORK_DETAIL_IMAGE_WIDTHS = [img.xl];
