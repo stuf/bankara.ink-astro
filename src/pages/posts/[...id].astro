@@ -1,11 +1,14 @@
 ---
-import type { GetStaticPaths } from 'astro';
+import type { GetStaticPaths, MarkdownHeading } from 'astro';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { getCollection } from 'astro:content';
-import MainLayout from '../../layouts/Main.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+
+import MainLayout from '@/layouts/Main.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import TOC from '@/components/TOC.astro';
+import { buildHierarchy } from '@/util/prose';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('post');
@@ -20,7 +23,9 @@ type Props = CollectionEntry<'post'>;
 
 const post = Astro.props;
 const x = await render(post);
-const { Content } = x;
+const { headings, Content } = x;
+
+const toc = buildHierarchy(headings);
 ---
 
 <MainLayout image={post.data.heroImage.src} title={post.data.title}>
@@ -35,9 +40,9 @@ const { Content } = x;
       >
         <div class="text-white text-shadow space-y-4">
           <h1 class="text-6xl">
-            <span class="inline-block bg-black px-2 py-1"
-              >{post.data.title}</span
-            >
+            <span class="inline-block bg-black px-2 py-1">
+              {post.data.title}
+            </span>
           </h1>
 
           {
@@ -52,8 +57,12 @@ const { Content } = x;
         </div>
       </div>
 
-      <div class="prose max-w-3/4 mx-auto">
-        <Content />
+      <div class="mt-12 grid grid-cols-4 max-w-5/6 gap-8 mx-auto">
+        <TOC headings={toc} className="order-2 border-l border-gray-300 pl-8" />
+
+        <div class="prose max-w-full order-1 col-span-3">
+          <Content />
+        </div>
       </div>
     </div>
   </div>
