@@ -28,3 +28,7 @@ body {
 details {
   /* @apply border-red-500 border-2; */
 }
+
+mark {
+  @apply bg-orange-300;
+}
