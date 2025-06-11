@@ -1,0 +1,40 @@
+---
+title: In-game rigs
+description: 'Overview of rig features and how to deal with them'
+pubDate: '2025-06-09'
+heroImage: './ingame-rigs/hero.png'
+---
+
+# How to
+
+## How to smiling/frowning face
+
+<div class="float-right pl-6">
+  ![Item Properties](./ingame-rigs/item-properties.png)
+</div>
+
+In 3D view:
+
+1. If you are not in <mark>Object mode</mark>, switch to <mark>Object mode</mark>
+
+1. Select the rig/armature
+
+1. Open the "N-panel"/right side panel if it's not already open (`n` on the keyboard)
+
+1. Go to the <mark>Item</mark> tab
+
+1. Under <mark>Properties</mark> there is a property named `face_model`; set it to `1` for the default neutral face, `2` for smiling, `3` for frowning
+
+<details open>
+  <summary>Tech info</summary>
+
+The three different face models are their own separate objects, found in the rig's `face` collection. Changing faces has been implemented through Blender's <mark>Drivers</mark>,
+which shows/hides the appropriate face models.
+
+</details>
+
+<div class="clear-both" />
+
+# Rig UI
+
+![Rig UI](./ingame-rigs/rig-ui.png)

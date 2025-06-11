@@ -1,0 +1,62 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/Main.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('post');
+
+  return posts.map(it => ({
+    params: { id: it.id },
+    props: it,
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = CollectionEntry<'post'>;
+
+const post = Astro.props;
+const x = await render(post);
+const { Content } = x;
+---
+
+<MainLayout>
+  <Header title={post.data.title} />
+
+  <div class="container mx-auto">
+    <div class="space-y-4">
+      <!-- Post header/hero -->
+      <div
+        class="flex items-center h-128 bg-center pl-12"
+        style={{ backgroundImage: `url(${post.data.heroImage.src})` }}
+      >
+        <div class="text-white text-shadow space-y-4">
+          <h1 class="text-6xl">
+            <span class="inline-block bg-black px-2 py-1"
+              >{post.data.title}</span
+            >
+          </h1>
+
+          {
+            post.data.description && (
+              <p class="text-xl">
+                <span class="inline-block bg-black px-2 py-1">
+                  {post.data.description}
+                </span>
+              </p>
+            )
+          }
+        </div>
+      </div>
+
+      <div class="prose max-w-3/4 mx-auto">
+        <Content />
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</MainLayout>
