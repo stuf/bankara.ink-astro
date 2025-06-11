@@ -24,3 +24,7 @@ html,
 body {
   height: 100%;
 }
+
+details {
+  /* @apply border-red-500 border-2; */
+}
