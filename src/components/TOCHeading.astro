@@ -1,0 +1,31 @@
+---
+import type { Heading } from '@/types/prose';
+
+interface Props {
+  heading: Heading;
+}
+
+const { heading } = Astro.props;
+
+const hasSubheadings = !!heading.subheadings.length;
+
+const INDENT_STEP_REM = 1;
+const indent = (heading.depth - 1) * INDENT_STEP_REM;
+const indentClassname = `pl-[${indent}rem]`;
+---
+
+<li class:list={[indentClassname, 'py-1']}>
+  <a href={`#${heading.slug}`} class="text-blue-700">
+    {heading.text}
+  </a>
+
+  {
+    hasSubheadings && (
+      <ul>
+        {heading.subheadings.map(h => (
+          <Astro.self heading={h} />
+        ))}
+      </ul>
+    )
+  }
+</li>
