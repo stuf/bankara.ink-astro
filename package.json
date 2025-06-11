@@ -9,17 +9,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.2.6",
+    "@astrojs/mdx": "^4.3.0",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.4.0",
     "@astrojs/vercel": "^8.1.4",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.7",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@vercel/analytics": "^1.5.0",
     "astro": "^5.7.13",
     "date-fns": "^4.1.0",
     "prettier-plugin-sort-json": "^4.1.1",
+    "sharp": "^0.34.2",
     "tailwindcss": "^4.1.7"
   },
   "devDependencies": {
