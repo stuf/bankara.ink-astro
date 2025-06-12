@@ -8,14 +8,10 @@ interface Props {
 const { heading } = Astro.props;
 
 const hasSubheadings = !!heading.subheadings.length;
-
-const INDENT_STEP_REM = 1;
-const indent = (heading.depth - 1) * INDENT_STEP_REM;
-const indentClassname = `pl-[${indent}rem]`;
 ---
 
-<li class:list={[indentClassname, 'py-1']}>
-  <a href={`#${heading.slug}`} class="text-blue-700">
+<li class="ml-4">
+  <a href={`#${heading.slug}`} class:list={['text-blue-700 block']}>
     {heading.text}
   </a>
 

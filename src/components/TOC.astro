@@ -13,7 +13,7 @@ const { className, headings } = Astro.props;
 <nav class:list={['space-y-2 float-right py-1 px-2', className]}>
   <header class="text-xl font-bold">Contents</header>
 
-  <ul class="">
+  <ul class="-ml-4">
     {headings.map(h => <TOCHeading heading={h} />)}
   </ul>
 </nav>
