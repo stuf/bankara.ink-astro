@@ -9,6 +9,8 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import TOC from '@/components/TOC.astro';
 import { buildHierarchy } from '@/util/prose';
+import Clear from '@/components/md/Clear.astro';
+import Test from '@/components/md/Test.astro';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('post');
@@ -26,6 +28,10 @@ const x = await render(post);
 const { headings, Content } = x;
 
 const toc = buildHierarchy(headings);
+
+const components = {
+  clear: Clear,
+};
 ---
 
 <MainLayout image={post.data.heroImage.src} title={post.data.title}>
@@ -69,3 +75,7 @@ const toc = buildHierarchy(headings);
 
   <Footer />
 </MainLayout>
+
+<style>
+  @reference '@/styles/global.css';
+</style>
