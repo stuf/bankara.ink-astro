@@ -1,0 +1,31 @@
+---
+interface Props {
+  imageSrc: string;
+  title: string;
+  description: string;
+}
+
+const { imageSrc, title, description } = Astro.props;
+---
+
+<!-- Post header/hero -->
+<div
+  class="flex items-center h-128 bg-center pl-12"
+  style={{ backgroundImage: `url(${imageSrc})` }}
+>
+  <div class="text-white text-shadow space-y-4">
+    <h1 class="text-6xl">
+      <span class="inline-block bg-black px-2 py-1">
+        {title}
+      </span>
+    </h1>
+
+    {
+      description && (
+        <p class="text-xl">
+          <span class="inline-block bg-black px-2 py-1">{description}</span>
+        </p>
+      )
+    }
+  </div>
+</div>
