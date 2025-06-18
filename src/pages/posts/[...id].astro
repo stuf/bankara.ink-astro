@@ -9,8 +9,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import TOC from '@/components/TOC.astro';
 import { buildHierarchy } from '@/util/prose';
-import Clear from '@/components/md/Clear.astro';
-import Test from '@/components/md/Test.astro';
+import Hero from '@/components/posts/Hero.astro';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('post');
@@ -28,10 +27,6 @@ const x = await render(post);
 const { headings, Content } = x;
 
 const toc = buildHierarchy(headings);
-
-const components = {
-  clear: Clear,
-};
 ---
 
 <MainLayout image={post.data.heroImage.src} title={post.data.title}>
@@ -40,33 +35,18 @@ const components = {
   <div class="container mx-auto">
     <div class="space-y-4">
       <!-- Post header/hero -->
-      <div
-        class="flex items-center h-128 bg-center pl-12"
-        style={{ backgroundImage: `url(${post.data.heroImage.src})` }}
-      >
-        <div class="text-white text-shadow space-y-4">
-          <h1 class="text-6xl">
-            <span class="inline-block bg-black px-2 py-1">
-              {post.data.title}
-            </span>
-          </h1>
-
-          {
-            post.data.description && (
-              <p class="text-xl">
-                <span class="inline-block bg-black px-2 py-1">
-                  {post.data.description}
-                </span>
-              </p>
-            )
-          }
-        </div>
-      </div>
+      <Hero
+        imageSrc={post.data.heroImage.src}
+        title={post.data.title}
+        description={post.data.description}
+      />
 
       <div class="mt-12 grid grid-cols-4 max-w-5/6 gap-8 mx-auto">
         <TOC headings={toc} className="order-2 border-l border-gray-300 pl-8" />
 
         <div class="prose max-w-full order-1 col-span-3">
+          {post.data.pubDate}
+
           <Content />
         </div>
       </div>
