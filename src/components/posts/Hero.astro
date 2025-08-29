@@ -1,16 +1,31 @@
 ---
+enum SizeEnum {
+  SM = 'sm',
+  MD = 'md',
+  LG = 'lg',
+}
+
+type Size = `${SizeEnum}`;
+
 interface Props {
   imageSrc: string;
   title: string;
   description: string;
+  size?: Size;
 }
 
-const { imageSrc, title, description } = Astro.props;
+const { imageSrc, title, description, size = 'md' } = Astro.props;
+
+const sizeClass: Record<Size, string> = {
+  sm: 'h-96',
+  md: 'h-128',
+  lg: 'h-[48rem]',
+};
 ---
 
 <!-- Post header/hero -->
 <div
-  class="flex items-center h-128 bg-center pl-12"
+  class:list={['flex items-center bg-center pl-12 bg-cover', sizeClass[size]]}
   style={{ backgroundImage: `url(${imageSrc})` }}
 >
   <div class="text-white text-shadow space-y-4">
