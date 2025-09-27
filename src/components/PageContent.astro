@@ -1,0 +1,17 @@
+---
+import Prose from '@/components/Prose.astro';
+---
+
+<div class="content">
+  <slot />
+</div>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .content {
+    /*  md:-mt-12 */
+    @apply w-9/12 md:mx-auto sm:m-0 p-8 md:px-16 bg-white relative space-y-2;
+    @apply max-sm:w-full;
+  }
+</style>
