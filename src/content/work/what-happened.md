@@ -7,6 +7,7 @@ image: '../../assets/works/20250925-what-happened.jpg'
 tags:
   - oc:cappy
   - lore
+  - polaroid
 ---
 
 # Shock
