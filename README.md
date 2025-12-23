@@ -1,3 +1,3 @@
 # bankara.ink
 
-What it says on the tin.
+Astro-powered site for my personal website, blogposts and more.
