@@ -66,10 +66,34 @@ const hasContent = !!work.rendered?.html;
 
   {
     hasContent && showContent && (
-      <article>
-        <div class="container mx-auto">
-          <div class="content">
-            {/* {work.data.tags && (
+      <Fragment>
+        <div
+          class:list={[
+            'fixed bottom-32 right-16',
+            'px-4 py-3',
+            'w-64',
+            'text-2xl',
+            'bg-black',
+            'text-white',
+            // 'border-2 border-red-500',
+            'rounded-xl',
+            'shadow-xl',
+            'rotate-90',
+          ]}
+        >
+          <div class="flex justify-center items-center space-x-4">
+            <span class="block">Story</span>
+            <Icon
+              icon="arrowLeft"
+              class="fill-white block size-12 rotate-180"
+            />
+          </div>
+        </div>
+
+        <article>
+          <div class="container mx-auto">
+            <div class="content">
+              {/* {work.data.tags && (
               <div class="content-meta">
                 <ul class="flex space-x-2">
                   {work.data.tags.map(it => (
@@ -81,12 +105,13 @@ const hasContent = !!work.rendered?.html;
               </div>
             )} */}
 
-            <div class="prose prose-slate prose-xl sm:prose-pink">
-              <Content />
+              <div class="prose prose-slate prose-xl sm:prose-pink" id="prose">
+                <Content />
+              </div>
             </div>
           </div>
-        </div>
-      </article>
+        </article>
+      </Fragment>
     )
   }
 </WorksGalleryLayout>
@@ -103,3 +128,9 @@ const hasContent = !!work.rendered?.html;
     /* @apply border-2; */
   }
 </style>
+
+<script>
+  console.log('woop');
+  const prose = document.getElementById('prose');
+  console.log({ prose });
+</script>

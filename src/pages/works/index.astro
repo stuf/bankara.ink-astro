@@ -6,10 +6,22 @@ import { format } from 'date-fns';
 import WorksGalleryLayout from '../../layouts/WorksGallery.astro';
 import { WORK_GALLERY_IMAGE_WIDTHS } from '../../consts';
 import Icon from '../../components/Icon.astro';
+// import { getEntries } from 'astro:content';
 
-const works = (await getCollection('work')).sort(
+const workData = await getCollection('work');
+
+const works = workData.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+// const tags = new Set(
+//   works
+//     .flatMap(it => it.data.tags)
+//     .filter(x => x)
+//     .sort(),
+// );
+
+// console.log(tags);
 ---
 
 <WorksGalleryLayout title="Works">
@@ -24,6 +36,8 @@ const works = (await getCollection('work')).sort(
           works.map(it => {
             const hasLore = it.rendered?.html && !it.data.hideContent;
             const hasCW = it.data.tw;
+            const isAU = it.data.tags?.includes('au');
+            const isSuggestive = it.data.tags?.includes('suggestive');
 
             return (
               <li
@@ -42,13 +56,27 @@ const works = (await getCollection('work')).sort(
                   </time>
                 </div>
 
-                {(hasLore || hasCW) && (
+                {(hasLore || hasCW || isAU || isSuggestive) && (
                   <div
                     class:list={[
                       'absolute px-2 py-1',
                       'text-white top-2 right-2 flex space-x-2 items-center',
                     ]}
                   >
+                    {isAU && (
+                      <div class="infoHighlight bg-green-500">
+                        <Icon icon="test-tube" />
+                        <span>AU</span>
+                      </div>
+                    )}
+
+                    {isSuggestive && (
+                      <div class="infoHighlight bg-red-500">
+                        <Icon icon="warning" />
+                        <span>Suggestive</span>
+                      </div>
+                    )}
+
                     {hasCW && (
                       <div class="infoHighlight bg-red-500">
                         <Icon icon="warning" />
