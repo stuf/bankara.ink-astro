@@ -14,14 +14,14 @@ const works = workData.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-// const tags = new Set(
-//   works
-//     .flatMap(it => it.data.tags)
-//     .filter(x => x)
-//     .sort(),
-// );
+const tags = new Set(
+  works
+    .flatMap(it => it.data.tags)
+    .filter(x => x)
+    .sort(),
+);
 
-// console.log(tags);
+console.log(tags);
 ---
 
 <WorksGalleryLayout title="Works">
@@ -38,6 +38,7 @@ const works = workData.sort(
             const hasCW = it.data.tw;
             const isAU = it.data.tags?.includes('au');
             const isSuggestive = it.data.tags?.includes('suggestive');
+            const isFanart = it.data.tags?.includes('fanart');
 
             return (
               <li
@@ -56,13 +57,20 @@ const works = workData.sort(
                   </time>
                 </div>
 
-                {(hasLore || hasCW || isAU || isSuggestive) && (
+                {(hasLore || hasCW || isAU || isFanart || isSuggestive) && (
                   <div
                     class:list={[
                       'absolute px-2 py-1',
                       'text-white top-2 right-2 flex space-x-2 items-center',
                     ]}
                   >
+                    {isFanart && (
+                      <div class="infoHighlight bg-emerald-400">
+                        <Icon icon="heart" />
+                        <span>Fanart</span>
+                      </div>
+                    )}
+
                     {isAU && (
                       <div class="infoHighlight bg-green-500">
                         <Icon icon="test-tube" />
