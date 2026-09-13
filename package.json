@@ -21,6 +21,7 @@
     "@types/react-dom": "^19.1.6",
     "astro": "^5.7.13",
     "date-fns": "^4.1.0",
+    "optics-ts": "^2.4.1",
     "prettier-plugin-sort-json": "^4.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
