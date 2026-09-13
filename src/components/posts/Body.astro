@@ -1,0 +1,48 @@
+---
+// with TOC: mt-12 max-w-5/6 mx-auto grid grid-cols-4 gap-8
+// without TOC: mt-12 max-w-5/6 mx-auto
+interface Props {
+  showToc?: boolean;
+}
+
+const { showToc = true } = Astro.props;
+
+const base = ['mt-12', 'max-w-4/6', 'mx-auto'];
+---
+
+<div class:list={['base', showToc && 'with-toc']}>
+  <div class="body">
+    <slot />
+  </div>
+
+  <div class="toc">
+    <slot name="toc" />
+  </div>
+</div>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .base {
+    @apply mt-12 mx-auto;
+    @apply w-10/12;
+    @apply sm:w-11/12;
+  }
+
+  .with-toc {
+    @apply grid grid-cols-12 gap-2;
+    @apply max-sm:block;
+  }
+
+  .with-toc .body {
+    @apply col-span-8;
+
+    @apply max-sm:order-2;
+  }
+
+  .with-toc .toc {
+    @apply col-span-4;
+
+    @apply max-sm:order-1;
+  }
+</style>

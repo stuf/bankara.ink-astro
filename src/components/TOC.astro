@@ -4,16 +4,24 @@ import TOCHeading from './TOCHeading.astro';
 
 interface Props {
   headings: Heading[];
-  className?: string;
+  class?: string;
 }
 
-const { className, headings } = Astro.props;
+const { class: className, headings, ...rest } = Astro.props;
+
+// space-y-2 float-right py-1 px-2
+
+const cns = [className, 'toc'];
 ---
 
-<nav class:list={['space-y-2 float-right py-1 px-2', className]}>
+<nav class:list={cns} {...rest}>
   <header class="text-xl font-bold">Contents</header>
 
   <ul class="-ml-4">
     {headings.map(h => <TOCHeading heading={h} />)}
   </ul>
 </nav>
+
+<style>
+  @reference '@/styles/global.css';
+</style>

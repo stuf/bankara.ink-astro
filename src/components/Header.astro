@@ -1,8 +1,8 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
 import Icon from '@/components/Icon.astro';
 import type { IconName } from '@/types';
+import { isDev } from '@/env';
 
 type HeaderLink = {
   href: string;
@@ -20,6 +20,11 @@ const navLinks: HeaderLink[] = [
   {
     href: '/works',
     text: 'Works',
+  },
+  {
+    href: '/journal',
+    text: 'Journal',
+    hide: true,
   },
   {
     href: '/about',
@@ -48,8 +53,18 @@ const socials: HeaderLink[] = [
       <div class="space-x-2">
         {
           navLinks
-            .filter(x => !x.hide)
-            .map(it => <HeaderLink href={it.href}>{it.text}</HeaderLink>)
+            .filter(x => {
+              if (isDev) {
+                return true;
+              }
+
+              return !x.hide;
+            })
+            .map(it => (
+              <HeaderLink href={it.href} ghost={it.hide && isDev}>
+                {it.text}
+              </HeaderLink>
+            ))
         }
       </div>
 
@@ -78,5 +93,11 @@ const socials: HeaderLink[] = [
     @apply inline-block px-2 underline;
     @apply text-blue-500;
     @apply hover:bg-blue-500 hover:text-white;
+  }
+
+  .nav-link {
+  }
+
+  .nav-link.hidden {
   }
 </style>

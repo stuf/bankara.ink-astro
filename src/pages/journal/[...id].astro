@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+
+import { Body, Prose } from '@/components/posts';
+import { ContentLayout } from '@/layouts';
+import { buildHierarchy } from '@/util/prose';
+import { TOC } from '@/components';
+
+export const getStaticPaths = (async () => {
+  const content = await getCollection('journal');
+  return content.map(it => ({
+    params: { id: it.id },
+    props: it,
+  }));
+}) satisfies GetStaticPaths;
+
+const entry = Astro.props;
+
+const rendered = await render(entry);
+const { headings, Content } = rendered;
+
+const toc = buildHierarchy(headings);
+---
+
+<ContentLayout title={entry.data.title}>
+  <Body>
+    <TOC slot="toc" headings={toc} />
+
+    <Prose>
+      <Content />
+    </Prose>
+  </Body>
+</ContentLayout>
+
+<style>
+  @reference '@/styles/global.css';
+</style>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const cns = [className, 'root'];
+---
+
+<div class:list={cns}>
+  <slot />
+</div>
+
+<style>
+  @reference '@/styles/global.css';
+
+  .root {
+    @apply border border-dashed;
+    @apply prose grow max-w-full;
+  }
+</style>

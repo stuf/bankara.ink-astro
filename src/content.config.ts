@@ -18,6 +18,24 @@ const work = defineCollection({
     }),
 });
 
+const journal = defineCollection({
+  loader: glob({ base: './src/content/journal', pattern: '**/*.{md,mdx}' }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      pubDate: z.coerce.date(),
+      updatedDate: z.coerce.date().optional(),
+      heroImage: image(),
+      flags: z
+        .object({
+          published: z.boolean(),
+        })
+        .partial()
+        .optional(),
+    }),
+});
+
 const post = defineCollection({
   loader: glob({ base: './src/content/post', pattern: '**/*.{md,mdx}' }),
   schema: ({ image }) =>
@@ -31,4 +49,4 @@ const post = defineCollection({
     }),
 });
 
-export const collections = { work, post };
+export const collections = { work, post, journal };
