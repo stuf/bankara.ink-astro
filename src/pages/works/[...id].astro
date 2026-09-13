@@ -26,7 +26,6 @@ type Props = CollectionEntry<'work'>;
 const work = Astro.props;
 const { Content } = await render(work);
 
-const isDev = import.meta.env.DEV;
 const showContent = !work.data.hideContent;
 const hasContent = !!work.rendered?.html;
 ---

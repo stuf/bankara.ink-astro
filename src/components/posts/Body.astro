@@ -2,15 +2,14 @@
 // with TOC: mt-12 max-w-5/6 mx-auto grid grid-cols-4 gap-8
 // without TOC: mt-12 max-w-5/6 mx-auto
 interface Props {
+  class?: string;
   showToc?: boolean;
 }
 
-const { showToc = true } = Astro.props;
-
-const base = ['mt-12', 'max-w-4/6', 'mx-auto'];
+const { showToc = true, class: className, ...rest } = Astro.props;
 ---
 
-<div class:list={['base', showToc && 'with-toc']}>
+<div class:list={['base', className, showToc && 'with-toc']} {...rest}>
   <div class="body">
     <slot />
   </div>
@@ -36,13 +35,11 @@ const base = ['mt-12', 'max-w-4/6', 'mx-auto'];
 
   .with-toc .body {
     @apply col-span-8;
-
     @apply max-sm:order-2;
   }
 
   .with-toc .toc {
     @apply col-span-4;
-
     @apply max-sm:order-1;
   }
 </style>

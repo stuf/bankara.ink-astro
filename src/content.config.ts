@@ -36,17 +36,4 @@ const journal = defineCollection({
     }),
 });
 
-const post = defineCollection({
-  loader: glob({ base: './src/content/post', pattern: '**/*.{md,mdx}' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      pubDate: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      heroImage: image(),
-      public: z.boolean().optional(),
-    }),
-});
-
-export const collections = { work, post, journal };
+export const collections = { work, journal };

@@ -2,16 +2,48 @@
 import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import MainLayout from '@/layouts/Main.astro';
+import { getCollection } from 'astro:content';
+
+import { Prose } from '@/components/posts';
+
+const entries = await getCollection('journal');
 ---
 
 <MainLayout title="Journal">
   <Header />
 
-  <main>content</main>
+  <main class="root">
+    <div>
+      {
+        entries.map(entry => (
+          <div>
+            <h1>{entry.data.title}</h1>
+            <div>{entry.data.pubDate}</div>
+            <p>{entry.data.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </main>
 
   <Footer />
 </MainLayout>
 
 <style>
   @reference '@/styles/global.css';
+
+  .root {
+    @apply container mx-auto my-4 py-4;
+  }
+
+  .entry {
+    @apply border;
+    @apply max-w-4/5 mx-auto;
+
+    @apply space-y-2;
+  }
+
+  .entry header {
+    @apply text-4xl;
+  }
 </style>

@@ -1,0 +1,32 @@
+---
+import MainLayout from '@/layouts/Main.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import PageHeading from '@/components/PageHeading.astro';
+import PageContent from '@/components/PageContent.astro';
+import Prose from '@/components/Prose.astro';
+---
+
+<MainLayout title="About">
+  <Header />
+
+  <main class="max-sm:px-8">
+    <div class="container mx-auto">
+      <PageContent>
+        <header>
+          <PageHeading title="About" />
+        </header>
+
+        <Prose>
+          <p>asklidhj</p>
+
+          <p>aslwih4jeuihas</p>
+
+          <p>sjedfij</p>
+        </Prose>
+      </PageContent>
+    </div>
+  </main>
+
+  <Footer />
+</MainLayout>
