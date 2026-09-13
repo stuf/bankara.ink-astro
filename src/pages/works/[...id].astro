@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { render } from 'astro:content';
 import { Picture } from 'astro:assets';
@@ -10,12 +10,15 @@ import WorksGalleryLayout from '@/layouts/WorksGallery.astro';
 import Icon from '@/components/Icon.astro';
 
 export const getStaticPaths = (async () => {
-  const works = await getCollection('work');
+  const COLLECTION = 'work';
+  const works = await getCollection(COLLECTION);
 
-  return works.map(it => ({
-    params: { id: it.id },
-    props: it,
-  }));
+  return works
+    .filter(x => !x.id.startsWith('_') || !x.data.hideEntry)
+    .map(it => ({
+      params: { id: it.id },
+      props: it,
+    }));
 }) satisfies GetStaticPaths;
 
 type Props = CollectionEntry<'work'>;
