@@ -14,6 +14,7 @@ const work = defineCollection({
       related: z.array(z.string()).optional(),
       tw: z.boolean().optional(),
       hideContent: z.boolean().optional(),
+      hideEntry: z.boolean().optional(),
     }),
 });
 
