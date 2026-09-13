@@ -10,9 +10,9 @@ import Icon from '../../components/Icon.astro';
 
 const workData = await getCollection('work');
 
-const works = workData.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const works = workData
+  .filter(it => !(it.id.startsWith('_') && it.data.hideEntry))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const tags = new Set(
   works
@@ -21,7 +21,9 @@ const tags = new Set(
     .sort(),
 );
 
-console.log(tags);
+console.log('Work index:');
+console.log('- %s work(s)', works.length);
+console.log('- %s tag(s) total', tags.size);
 ---
 
 <WorksGalleryLayout title="Works">
