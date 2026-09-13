@@ -2,8 +2,16 @@
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 import Icon from '@/components/Icon.astro';
+import type { IconName } from '@/types';
 
-const navLinks = [
+type HeaderLink = {
+  href: string;
+  text: string;
+  icon?: IconName;
+  hide?: boolean;
+};
+
+const navLinks: HeaderLink[] = [
   {
     href: '/',
     text: 'Home',
@@ -18,6 +26,15 @@ const navLinks = [
     text: 'About',
     hide: true,
   },
+];
+
+const socials: HeaderLink[] = [
+  {
+    icon: 'twitter',
+    href: 'https://twitter.com/piparkaq',
+    text: '@piparkaq',
+  },
+  { icon: 'github', href: 'https://github.com/stuf', text: '@stuf' },
 ];
 ---
 
@@ -38,17 +55,16 @@ const navLinks = [
 
       <div class="grow text-right fill-black text-black">
         <ul class="inline-flex space-x-2">
-          <li>
-            <a href="https://twitter.com/piparkaq" class="external">
-              <Icon icon="twitter" /> / @piparkaq
-            </a>
-          </li>
-
-          <li>
-            <a href="https://github.com/stuf" class="external">
-              <Icon icon="github" /> / @stuf
-            </a>
-          </li>
+          {
+            socials.map(it => (
+              <li>
+                <a class="external" href={it.href}>
+                  {it.icon && <Icon icon={it.icon} />}
+                  {it.text}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </nav>

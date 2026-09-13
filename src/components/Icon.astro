@@ -1,17 +1,8 @@
 ---
-enum IconType {
-  BOOK = 'book',
-  ARROW_LEFT = 'arrowLeft',
-  WARNING = 'warning',
-  OPTION = 'option',
-  TEST_TUBE = 'test-tube',
-  TWITTER = 'twitter',
-  GITHUB = 'github',
-  HEART = 'heart',
-}
+import type { IconName } from '@/types';
 
 interface Props {
-  icon: `${IconType}`;
+  icon: IconName;
   class?: string;
   inline?: boolean;
 }
