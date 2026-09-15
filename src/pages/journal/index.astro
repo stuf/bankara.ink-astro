@@ -5,6 +5,8 @@ import MainLayout from '@/layouts/Main.astro';
 import { getCollection } from 'astro:content';
 
 import { Prose } from '@/components/posts';
+import FormattedDate from '@/components/FormattedDate.astro';
+import Tag from '@/components/Tag.astro';
 
 const entries = await getCollection('journal');
 ---
@@ -16,11 +18,15 @@ const entries = await getCollection('journal');
     <div>
       {
         entries.map(entry => (
-          <div>
-            <h1>{entry.data.title}</h1>
-            <div>{entry.data.pubDate}</div>
+          <article class="entry-item">
+            <header>
+              <h1>{entry.data.title}</h1>
+            </header>
+
+            <FormattedDate date={entry.data.pubDate} />
+
             <p>{entry.data.description}</p>
-          </div>
+          </article>
         ))
       }
     </div>
@@ -34,6 +40,10 @@ const entries = await getCollection('journal');
 
   .root {
     @apply container mx-auto my-4 py-4;
+  }
+
+  .entry-item {
+    @apply border;
   }
 
   .entry {
